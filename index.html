@@ -1,1 +1,123 @@
-Baustelle
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="LVM-IT RoCA vs. SPA - German : SPA RoCA">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>LVM-IT RoCA vs. SPA - German</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/LVM-IT">View on GitHub</a>
+
+          <h1 id="project_title">LVM-IT RoCA vs. SPA - German</h1>
+          <h2 id="project_tagline">SPA RoCA</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="anforderungen" class="anchor" href="#anforderungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Anforderungen</h1>
+
+<h2>
+<a id="einleitung" class="anchor" href="#einleitung" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Einleitung</h2>
+
+<p>Um das Jahr 2000 herum hat die LVM Versicherung ein neues Außendienst-System entworfen. Es wurde entschieden das System Server- und Client-Seitig in Java zu implementieren. Der Client wurde mit der Java Swing-Bibliothek als Thin-Client entwickelt. Dieser wurde so implementiert, dass Views im Client definiert werden, die Befüllung und jegliche Interaktion vom Server aus gesteuert wird. Somit ist im Client weder Businesslogik noch Anwendungslogik enthalten. Dieses System wurde später auch für weitere Innendienst-Anwendungen genutzt und weiter ausgebaut. Die Anwendungen in dem System (z.B. Produkt-System und Inkasso-System) sind dabei über die Oberfläche, sowie über Backend-Aufrufe miteinander verknüpft. Dieses System wird aktuell als Monolith freigegeben und erzeugt dadurch starke Abhängigkeiten zwischen den Entwicklungsteams.</p>
+
+<p>Aktuell wird untersucht, welche zukünftige Alternativen es zu der aktuellen Oberfläche gibt und welche für die LVM Versicherung geeignet ist. Dabei haben wir den Fokus auf browserbasierte Oberflächen gelegt, da desktopbasierte native Bibliotheken zukünftige Plattformwechsel erschweren würden. Aktuell verwendet die LVM Versicherung ein auf Ubuntu basierendes Betriebssystem.</p>
+
+<p>Um diese Alternativen zu betrachten haben wir die Architekturen Single-Page-App (SPA) und Resource-oriented Client Architecture (RoCA) betrachtet. SPA erzeugt und rendert auf der Client-seite HTML und ROCA erzeugt dies auf der Server-Seite. Es gibt noch weitere Architekturen der server-seitigen HTML Erzeugung, wie stateful-komponenten-basierte Systeme (z.B. JavaServerFaces). Diese haben den Nachteil, dass sie schlechter durch nicht persistente Session-Daten skalierbar und in Cloud-Umgebungen einsetzbar sind, daher haben wir alle stateful-Archtekturen auf der Server-Seite ausgeschlossen.</p>
+
+<p>Für die genauere Betrachtung haben wir die Firmen innoq (RoCA) und thinktecture (SPA) beauftragt Prototypen zu entwickeln, die die folgende Anforderungen und UseCases abdecken.</p>
+
+<h2>
+<a id="rahmenbedingungen" class="anchor" href="#rahmenbedingungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rahmenbedingungen</h2>
+
+<p>Als Beispielbackend wurde ein REST-Mock-Service erstellt, der die benötigten Daten bereitstellt. Das Einsatzgebiet der Anwendung konzentriert sich auf die vom LVM vorgegebene Infrastruktur. Daher reicht es einen Browser zu unterstützen. </p>
+
+<h2>
+<a id="fachliche-anfoderungen" class="anchor" href="#fachliche-anfoderungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fachliche Anfoderungen</h2>
+
+<p><a href="https://github.com/unicorn.png">Fachliche Darstellung</a>
+Unter dem Stichpunkt "Kunde im Mittelpunkt" verstehen wir, dass die Anwendung alle Informationen zu dem Kunden anzeigen soll und keine spartenbezogene Sicht haben sollte. Aus der Kundenübersicht kann der Vertreter oder Innendienst-Mitarbeiter in die einzelnen Sparten springen, sieht dabei jedoch weiterhin die allgemeinen Daten des Kunden. Die einzelnen Anwendungen sind fachlich verknüpft, wie z.B. das Angebots-/Antragssystem mit dem Vertragssystem, auf Grund dessen muss eine einfache Interaktion zwischen den Anwendungen möglich sein. D.h. der Sprung z.B. aus dem Vertrag in dazugehörige Schäden oder die Anzeige von Schadeninformationen innerhalb der Vertragsübersicht muss realisierbar sein.</p>
+
+<p>Integration zwischen fachlichen Anwendungen ist notwendiger Komfort, der die Anwendung erst gut bedienbar macht.  Neben den kundenzentrischen Anwendungen gibt einzelne Anwendungen (wie z.B. Finanzrechner), die ebenso leicht erreichbar sein müssen. Die Integration ist hier durch eine sehr dünne Kopplung an der Oberfläche möglich.
+Die Komplexität der Formulare umfasst eine Vielzahl von Attributen und mehreren Struktur-Ebenen (Vertrag - Person - Versichertes Objekt - Detailinformationen), die in der Oberfläche abgebildet  werden müssen. Die Schwierigkeit besteht darin eine umfangreiche und komplexe Struktur einfach und verständlich darzustellen und das Maximum an Bedienbarkeit zu gewährleisten.
+In der Bearbeitung von Vorgängen (z.B. Angebotserstellung) kann es durch Kundenkontakt (Anruf oder persönlich in der Agentur) zu Unterbrechungen kommen. Dabei wird der aktuelle Vorgang zur Seite gelegt, der Kunde bedient und anschließend muss die Aufnahme des vorherigen Vorgang wieder möglich sein. Ebenso sollte es möglich sein bestimmte Formulare parallel bearbeiten zu können (z.B. mehrere Angebotsvarianten, die man dem Kunden vorstellt). Der Wechsel  zwischen den Formularen muss schnell und einfach funktionieren, außerdem sollte der Überblick über alle geöffneten Formulare vorhanden sein.</p>
+
+<h2>
+<a id="technische-anforderungen" class="anchor" href="#technische-anforderungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Technische Anforderungen</h2>
+
+<p>Anwendungen insbesondere im Innendienst haben einen großen Anteil an Formular-Daten, die verarbeitet werden. In der Regel werden die Formulardaten bearbeitet, automatisch geprüft und gesichert. Neben den Formularen, werden Wizards zur geführten Eingabe verwendet. Die UseCases des Innendienstes sind primär prozessorientiert und werden mittels eines Briefkastens (Aufgabenliste) angestoßen bzw. abgearbeitet. Daher haben wir die UseCases mit Formularen, Wizard und einem Briefkasten formuliert. Das prozessorientierte Vorgehen zeigt sich darin, dass z.B. der Sachbearbeiter seinen Briefkasten aufruft, dort einen Eintrag öffnet, auf dessen Bezug (z.B. Vertrag oder Schaden) klickt und eine Anzeige des Bezugs bekommt. Nun kann der Sachbearbeiter den Bezug bearbeiten. Nach der Bearbeitung wird der Bezug geschlossen und der Briefkasten kommt wieder in den Vordergrund. Dieser Prozess kann mehrere Ebenen haben (z.B. Briefkasten -&gt; Vertrag -&gt; Schaden).
+Im Formular haben Felder teilweise Abhängigkeiten (z.B. bei der Veränderung eines beitragsrelevanten Feldes müssen alle Beitragsfelder abgelöscht werden), dies muss clientseitig direkt ausgeführt werden.</p>
+
+<p>Durch die Erfahrung der immer größer werdenden Anwendung und dem monolithischen System soll das zukünftige System modular aufgebaut werden, d.h. dass einzelne Anwendungsteile (Schaden, Vertrag, Briefkasten) losgelöst von einander betrieben und deployed werden können. Trotz dieser Modularisierung muss eine Integration möglich sein, wobei diese Integration ein einfacher Link oder Komponenten von anderen Anwendungsteilen sein kann. Eine Wiederverwendung von Komponenten soll ermöglicht werden (z.B. Berufsauswahl muss übergreifend zur Verfügung gestellt werden).</p>
+
+<p>Um eine große Anzahl an Oberflächen produzieren zu können, muss ein einheitliches Layout sowie GUI-Komponenten bereitgestellt werden können. Diese Komponenten müssen einfach einzusetzen und leicht erweiterbar sein.</p>
+
+<p>Da die Anwendung auch im Vertrieb verwendet werden sollen, muss sie mit geringer Bandbreite und hoher Latenz auskommen und trotzdem eine ausreichende UserExperience (UX) bieten. Grundsätzlich wurde das Thema UX hier nicht betrachtet.</p>
+
+<p>Zukünftig wollen wir den Browser als Laufzeitumgebung unserer Anwendungen verwenden und deshalb seine nativen Funktionen, wie bookmarkable URLs, Vor- und Zurück-Navigation und Tabs nutzen.</p>
+
+<h2>
+<a id="usecases" class="anchor" href="#usecases" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UseCases</h2>
+
+<p>Mit den UseCases wollen wir die grundlegenden Anforderungen abbilden. Die UseCases müssen durch folgende Anwendungen in eigenen Modulen umgesetzt werden: Rahmenanwendung (Kundensuche, Kundenübersicht), Briefkasten, Brieferzeugung, Berufsauswahl, Schaden</p>
+
+<h3>
+<a id="usecase-1-kundengespräch-mit-schadenaufnahme" class="anchor" href="#usecase-1-kundengespr%C3%A4ch-mit-schadenaufnahme" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UseCase 1: "Kundengespräch mit Schadenaufnahme"</h3>
+
+<p>Über einen Dialog kann der Kunde über seinen Namen und weitere Kriterien gesucht werden. In der Ergebnisliste kann ein Kunde ausgewählt und geöffnet werden. In der geöffneten Kundenübersicht werden allgemeine Informationen zu dem Kunden, wie Kontakthistorie, Angebote, Anträge und Verträge angezeigt.
+Über einen Button öffnet sich ein neues Angebot, in dem das Geburtstagsdatum und die Anschrift des zuvor ausgewählten Kunden vorbelegt sind. Die Berechnen-Funktion wird aufgerufen, es erscheint ein Fehlerdialog. An den Fehlermeldungen kann auf den Bezug geklickt werden und das fehlerhafte Feld erhält den Fokus.
+Eine weitere Anwendungskomponente stellt die Funktion der Berufssuche zur Verfügung. Nachdem der Anwender das Angebot gesichert hat kann er das Angebot kopieren und beide Angebote parallel öffnen.
+Parallel wird ein weiterer Kunde über die Kundensuche mittels der Vertragsnummer geöffnet. Zu diesem Vertrag soll eine Schadenserfassung erfolgen. Anschließend wird der erste Kunde als offener Vorgang erneut geöffnet. Alle offenen Vorgänge (Angebote) zu dem Kunden werden geschlossen - es erscheint der Hinweis auf ungesicherte Daten.</p>
+
+<h3>
+<a id="usecase-2-integration-und-zusammenspiel-von-anwendungen" class="anchor" href="#usecase-2-integration-und-zusammenspiel-von-anwendungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UseCase 2: "Integration und Zusammenspiel von Anwendungen"</h3>
+
+<p>Der Briefkasten wird geöffnet und zeigt eine Liste aller Einträge an. Einem Briefkasteneintrag kann ein Bezug (z.B. Vertrag, Schaden) zugeordnet sein. Ist ein Bezug zugeordnet erhält der Anwender die Möglichkeit in die entsprechende Anwendung zu springen. Wird die geöffnete Anwendung geschlossen wird erneut die Übersicht des Briefkastens dargestellt.</p>
+
+<h3>
+<a id="usecase-3-wizard" class="anchor" href="#usecase-3-wizard" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UseCase 3: "Wizard"</h3>
+
+<p>Innerhalb der Vertragsanwendung soll eine Brieferstellung per Wizard möglich sein. Hierzu werden in einzelnen Schritten (Dokumentenauswahl, Empfängerauswahl, Zusammenfassung) die benötigten Informationen zur Brieferstellung zusammengetragen.</p>
+
+<h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<p>You can <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/#mentioning-users-and-teams" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+
+<p><a href="https://github.com/shillmann" class="user-mention">@shillmann</a>
+<a href="https://github.com/cpiepel" class="user-mention">@cpiepel</a>
+<a href="https://github.com/grueny" class="user-mention">@grueny</a></p>
+
+<h3>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+<p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.
+<a href="http://www.lvm.de">http://www.lvm.de</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
