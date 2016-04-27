@@ -49,7 +49,7 @@
 <h2>
 <a id="fachliche-anfoderungen" class="anchor" href="#fachliche-anfoderungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fachliche Anfoderungen</h2>
 
-<p><a href="https://raw.githubusercontent.com/LVM-IT/lvm-it.github.io/master/images/fachlichesModell.png?token=AJ94S6Y8lsfWZE_UEaSgSXY4IlfyuOMmks5XKb5JwA%3D%3D"><img style="width:600px" src="https://raw.githubusercontent.com/LVM-IT/lvm-it.github.io/master/images/fachlichesModell.png?token=AJ94S6Y8lsfWZE_UEaSgSXY4IlfyuOMmks5XKb5JwA%3D%3D"/></a><br>
+<p><a href="https://raw.githubusercontent.com/LVM-IT/lvm-it.github.io/master/images/fachlichesModell.png?token=AJ94S6Y8lsfWZE_UEaSgSXY4IlfyuOMmks5XKb5JwA%3D%3D">Fachliche Darstellung</a><br>
 Unter dem Stichpunkt "Kunde im Mittelpunkt" verstehen wir, dass die Anwendung alle Informationen zu dem Kunden anzeigen soll und keine spartenbezogene Sicht haben sollte. Aus der Kundenübersicht kann der Vertreter oder Innendienst-Mitarbeiter in die einzelnen Sparten springen, sieht dabei jedoch weiterhin die allgemeinen Daten des Kunden. Die einzelnen Anwendungen sind fachlich verknüpft, wie z.B. das Angebots-/Antragssystem mit dem Vertragssystem, auf Grund dessen muss eine einfache Interaktion zwischen den Anwendungen möglich sein. D.h. der Sprung z.B. aus dem Vertrag in dazugehörige Schäden oder die Anzeige von Schadeninformationen innerhalb der Vertragsübersicht muss realisierbar sein.</p>
 
 <p>Integration zwischen fachlichen Anwendungen ist notwendiger Komfort, der die Anwendung erst gut bedienbar macht.  Neben den kundenzentrischen Anwendungen gibt einzelne Anwendungen (wie z.B. Finanzrechner), die ebenso leicht erreichbar sein müssen. Die Integration ist hier durch eine sehr dünne Kopplung an der Oberfläche möglich.
