@@ -13,11 +13,6 @@
     <section class="page-header">
       <h1 class="project-name">LVM-IT RoCA vs. SPA - German</h1>
       <h2 class="project-tagline">#SPA #RoCA</h2>
-      <h2><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="spa,roca">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-     <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-<g:plusone></g:plusone></h2>
-      
-      
     </section>
 
     <section class="main-content">
@@ -37,7 +32,7 @@
 
 <p>Um diese Alternativen zu betrachten, wurden die Architekturen Single-Page-Application (SPA) und Resource-oriented Client Architecture (RoCA) untersucht. SPA erzeugt auf der Client-Seite HTML, während ROCA dies ausschließlich auf der Server-Seite tut. Es gibt noch weitere Architekturen der serverseitigen HTML-Erzeugung, wie zustandsbehaftete komponenten-basierte Systeme (z.B. JavaServerFaces). Diese haben den Nachteil, dass sie durch nicht persistente Sitzungs-Daten schlechter skalierbar und in Cloud-Umgebungen nicht einsetzbar sind. Daher wurden diese ausgeschlossen.</p>
 
-<p>Für die genauere Betrachtung wurden die Firmen innoq (RoCA) und thinktecture (SPA) beauftragt, Prototypen zu entwickeln, die die nachfolgend beschriebenen Anforderungen und UseCases abdecken.</p>
+<p>Für die genauere Betrachtung wurden die Firmen innoq (RoCA) und thinktecture (SPA) beauftragt, Prototypen zu entwickeln, die die nachfolgend beschriebenen Anforderungen und Szenarien abdecken.</p>
 
 <h2>
 <a id="entwickler-von-innoq" class="anchor" href="#entwickler-von-innoq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Entwickler von innoQ</h2>
@@ -95,7 +90,7 @@ Das Einsatzgebiet der Anwendung konzentriert sich auf die von der LVM vorgegeben
 
 <p>Anwendungen insbesondere im Innendienst bestehen aus vielen Formulardaten, die vom Sachbearbeiter verarbeitet werden. In der Regel werden die Formulardaten bearbeitet, automatisch geprüft und gesichert. Neben den Formularen werden Wizards zur geführten Eingabe verwendet. Diese umfangreichen und z.T. komplexen Formulare sollen in den Prototypen abgebildet werden.</p>
 
-<p>Die UseCases des Innendienstes sind primär <strong>prozessorientiert</strong> und werden mittels einer Aufgabenliste durch den Sachbearbeiter angestoßen bzw. abgearbeitet. Daher haben wir im nachfolgenden Absatz die UseCases mit Formularen, Wizard und einer Aufgabenliste formuliert. Das prozessorientierte Vorgehen zeigt sich darin, dass z.B. der Sachbearbeiter seine Aufgabenliste (Briefkasten) aufruft und dort einen einzelnen Eintrag öffnet. Von dort kann er in den Bezug (z.B. Vertrag oder Schaden) verzweigen und ihn ggf. dort bearbeiten. Nach der Bearbeitung wird dieser Bezug geschlossen und die Aufgabenliste wird wieder angezeigt. Dieser Prozess kann mehrere Ebenen haben (z.B. Aufgabenliste -&gt; Vertrag -&gt; Schaden), was im Prototypen abgebildet werden soll.</p>
+<p>Die Szenarien des Innendienstes sind primär <strong>prozessorientiert</strong> und werden mittels einer Aufgabenliste durch den Sachbearbeiter angestoßen bzw. abgearbeitet. Daher haben wir im nachfolgenden Absatz die Szenarien mit Formularen, Wizard und einer Aufgabenliste formuliert. Das prozessorientierte Vorgehen zeigt sich darin, dass z.B. der Sachbearbeiter seine Aufgabenliste (Briefkasten) aufruft und dort einen einzelnen Eintrag öffnet. Von dort kann er in den Bezug (z.B. Vertrag oder Schaden) verzweigen und ihn ggf. dort bearbeiten. Nach der Bearbeitung wird dieser Bezug geschlossen und die Aufgabenliste wird wieder angezeigt. Dieser Prozess kann mehrere Ebenen haben (z.B. Aufgabenliste -&gt; Vertrag -&gt; Schaden), was im Prototypen abgebildet werden soll.</p>
 
 <p>Formularfelder haben teilweise fachliche Abhängigkeiten untereinander: z.B. müssen bei der Veränderung eines beitragsrelevanten Feldes alle Ergebnisfelder abgelöscht werden. Dies soll clientseitig direkt ausgeführt werden.</p>
 
@@ -108,12 +103,12 @@ Das Einsatzgebiet der Anwendung konzentriert sich auf die von der LVM vorgegeben
 <p>Zukünftig wollen wir den Browser als Laufzeitumgebung unserer Anwendungen verwenden und deshalb sollen die nativen Funktionen, wie dauerhafte URLs, Vor- und Zurück-Navigation und Tabs verwendet werden.</p>
 
 <h2>
-<a id="usecases" class="anchor" href="#usecases" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UseCases</h2>
+<a id="szenarien" class="anchor" href="#szenarien" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Szenarien</h2>
 
-<p>Mit den UseCases wollen wir die grundlegenden Anforderungen abbilden. Diese müssen durch folgende Anwendungen in eigenen Modulen umgesetzt werden: Kundensuche und Kundenübersicht (Rahmenanwendung), Aufgabenliste (modulare Anwendung), Brieferzeugung (Wizard), Berufsauswahl (modulare Komponente), Schaden (modulare Anwendung) </p>
+<p>Mit den Szenarien wollen wir die grundlegenden Anforderungen abbilden. Diese müssen durch folgende Anwendungen in eigenen Modulen umgesetzt werden: Kundensuche und Kundenübersicht (Rahmenanwendung), Aufgabenliste (modulare Anwendung), Brieferzeugung (Wizard), Berufsauswahl (modulare Komponente), Schaden (modulare Anwendung) </p>
 
 <h3>
-<a id="usecase-1-kundengespräch-mit-schadenaufnahme" class="anchor" href="#usecase-1-kundengespr%C3%A4ch-mit-schadenaufnahme" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UseCase 1: "Kundengespräch mit Schadenaufnahme"</h3>
+<a id="szenario-1-kundengespräch-mit-schadenaufnahme" class="anchor" href="#szenario-1-kundengespr%C3%A4ch-mit-schadenaufnahme" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Szenario 1: "Kundengespräch mit Schadenaufnahme"</h3>
 
 <p>Über einen Dialog wird der Kunde über seinen Namen und weitere Kriterien gesucht. In der Ergebnisliste wird ein Kunde ausgewählt und geöffnet. In der geöffneten Kundenübersicht werden allgemeine Informationen zu dem Kunden, wie Kontakthistorie, Angebote, Anträge und Verträge angezeigt.
 Über einen Button öffnet sich ein neues Angebot, in dem das Geburtstagsdatum und die Anschrift des zuvor ausgewählten Kunden vorbelegt sind. Die Berechnen-Funktion wird aufgerufen und es erscheint ein Fehlerdialog mit mehreren Meldungen. Über die Fehlermeldungen kann zu den fehlerhaften Feldern navigiert werden.</p>
@@ -124,12 +119,12 @@ Das Einsatzgebiet der Anwendung konzentriert sich auf die von der LVM vorgegeben
 Zwischenzeitlich wird ein weiterer Kunde über die Kundensuche mittels der Vertragsnummer geöffnet. Zu diesem Vertrag erfolgt eine Schadenserfassung. Anschließend wird der erste Kunde als offener Vorgang erneut geöffnet. Alle offenen Vorgänge (Angebote) zu dem Kunden werden geschlossen - es erscheint der Hinweis auf ungesicherte Daten.</p>
 
 <h3>
-<a id="usecase-2-integration-und-zusammenspiel-von-anwendungen" class="anchor" href="#usecase-2-integration-und-zusammenspiel-von-anwendungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UseCase 2: "Integration und Zusammenspiel von Anwendungen"</h3>
+<a id="szenario-2-integration-und-zusammenspiel-von-anwendungen" class="anchor" href="#szenario-2-integration-und-zusammenspiel-von-anwendungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Szenario 2: "Integration und Zusammenspiel von Anwendungen"</h3>
 
 <p>Die Aufgabenliste wird geöffnet und zeigt eine Liste aller Einträge an. Einem Eintrag kann ein Bezug (z.B. Vertrag, Schaden) zugeordnet sein. Ist ein Bezug zugeordnet, erhält der Anwender die Möglichkeit, in die entsprechende Anwendung zu verzweigen. Wird die geöffnete Anwendung geschlossen, wird erneut die Aufgabenliste dargestellt.</p>
 
 <h3>
-<a id="usecase-3-wizard" class="anchor" href="#usecase-3-wizard" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UseCase 3: "Wizard"</h3>
+<a id="szenario-3-wizard" class="anchor" href="#szenario-3-wizard" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Szenario 3: "Wizard"</h3>
 
 <p>Innerhalb der Vertragsanwendung soll eine Brieferstellung per Wizard möglich sein. Hierzu werden in einzelnen Schritten (Dokumentenauswahl, Empfängerauswahl, Zusammenfassung) die benötigten Informationen zur Brieferstellung zusammengetragen.</p>
 
