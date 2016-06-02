@@ -25,7 +25,7 @@
 <h2>
 <a id="einleitung" class="anchor" href="#einleitung" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Einleitung</h2>
 
-<p>Um das Jahr 2000 hat die LVM Versicherung ein neues Außendienst-System entworfen, welches zur Akquise und Kundenstammdatenverwaltung im Sinne einer Customer Relationship Management-Anwendung (CRM) eingesetzt wird. Es wurde entschieden, das System sowohl auf Server- als auch auf Client-Seite in Java zu implementieren. Der Client wurde mit der Java Swing-Bibliothek als Thin-Client entwickelt. Dieser wurde so implementiert, dass Views im Client definiert werden während die Befüllung und jegliche Interaktion vom Server aus gesteuert wird. Somit ist im Client weder Businesslogik noch Anwendungslogik enthalten.</p>
+<p>Im Jahr 2000 hat die LVM Versicherung ein neues Außendienst-System entworfen, welches zur Akquise und Kundenstammdatenverwaltung im Sinne einer Customer Relationship Management-Anwendung (CRM) eingesetzt wird. Es wurde entschieden, das System sowohl auf Server- als auch auf Client-Seite in Java zu implementieren. Der Client wurde mit der Java Swing-Bibliothek als Thin-Client entwickelt. Dieser wurde so implementiert, dass Views im Client definiert werden während die Befüllung und jegliche Interaktion vom Server aus gesteuert wird. Somit ist im Client weder Business- noch Anwendungslogik enthalten.</p>
 
 <p>Die einzelnen Anwendungen in dem System (z.B. Produkt-Anwendung und Inkasso-Anwendung) sind dabei über die Oberfläche sowie über Backend-Aufrufe miteinander verknüpft. Dieses System wird aktuell als Monolith freigegeben und erzeugt dadurch starke Abhängigkeiten zwischen den Entwicklungsteams. Die Fachlogik aus dem System wird in REST- und asynchronen (Batch sowie Einzelsatz) Anwendungen wiederverwendet.</p>
 
@@ -33,9 +33,9 @@
 
 <p>Aktuell wird untersucht, welche Alternativen es zu der aktuellen Oberfläche gibt und welche für die LVM Versicherung geeignet ist. Dabei wurde der Fokus auf browserbasierte Oberflächen gelegt, da desktopbasierte native Bibliotheken zukünftige Plattformwechsel erschweren würden. Aktuell verwendet die LVM Versicherung ein auf Ubuntu basierendes Client-Betriebssystem.</p>
 
-<p>Um diese Alternativen zu betrachten, wurden die Architekturen Single-Page-Application (SPA) und Resource-oriented Client Architecture (RoCA) untersucht. SPA erzeugt auf der Client-Seite HTML, während ROCA dies ausschließlich auf der Server-Seite tut. Es gibt noch weitere Architekturen der serverseitigen HTML-Erzeugung, wie zustandsbehaftete komponenten-basierte Systeme (z.B. JavaServerFaces). Diese haben den Nachteil, dass sie durch nicht persistente Sitzungs-Daten schlechter skalierbar und in Cloud-Umgebungen nicht einsetzbar sind. Daher wurden diese ausgeschlossen.</p>
+<p>Um diese Alternativen zu betrachten, wurden die Architekturen Single-Page-Application (SPA) und Resource-oriented Client Architecture (RoCA) untersucht. SPA erzeugt auf der Client-Seite HTML, während ROCA dies ausschließlich auf der Server-Seite tut. Es gibt noch weitere Architekturen der serverseitigen HTML-Erzeugung, wie zustandsbehaftete komponenten-basierte Systeme (z.B. JavaServerFaces). Diese haben den Nachteil, dass sie durch nicht persistente Sitzungs-Daten schlechter skalierbar und in Cloud-Umgebungen nicht einsetzbar sind. Daher wurden diese Architekturvarianten ausgeschlossen.</p>
 
-<p>Für die genauere Betrachtung wurden die Firmen innoq (RoCA) und thinktecture (SPA) beauftragt, Prototypen zu entwickeln, die die nachfolgend beschriebenen Anforderungen und Szenarien abdecken.</p>
+<p>Für die genauere Betrachtung wurden die Firmen innoQ (RoCA) und Thinktecture (SPA) beauftragt, Prototypen zu entwickeln, die die nachfolgend beschriebenen Anforderungen und Szenarien abdecken.</p>
 
 <h2>
 <a id="entwickler-von-innoq" class="anchor" href="#entwickler-von-innoq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Entwickler von innoQ</h2>
@@ -46,7 +46,7 @@
 </ul>
 
 <h2>
-<a id="entwickler-von-thinktecture" class="anchor" href="#entwickler-von-thinktecture" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Entwickler von thinktecture</h2>
+<a id="entwickler-von-thinktecture" class="anchor" href="#entwickler-von-thinktecture" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Entwickler von Thinktecture</h2>
 
 <ul>
 <li><a href="https://twitter.com/ThorstenHans">Thorsten Hans</a></li>
@@ -54,9 +54,9 @@
 </ul>
 
 <h1>
-<a id="ziel-der-veröffentlichung-auf-github" class="anchor" href="#ziel-der-ver%C3%B6ffentlichung-auf-github" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ziel der Veröffentlichung auf github</h1>
+<a id="ziel-der-veröffentlichung-auf-github" class="anchor" href="#ziel-der-ver%C3%B6ffentlichung-auf-github" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ziel der Veröffentlichung auf GitHub</h1>
 
-<p>Nach der erfolgten Umsetzung der beiden Prototypen wollen wir diese hiermit der Allgemeinheit zur Verfügung stellen, um eine öffentliche Diskussion über die Vor- und Nachteile beider Architekturen anzustoßen.</p>
+<p>Nach der erfolgten Umsetzung der beiden Prototypen wollen wir, die LVM Versicherung, beide Lösungsansätze hiermit der Allgemeinheit zur Verfügung stellen, um eine öffentliche Diskussion über die Vor- und Nachteile beider Architekturen anzustoßen.</p>
 
 <p>Mit welchen Fragestellungen beschäftigen wir uns?</p>
 
@@ -78,7 +78,7 @@ Das Einsatzgebiet der Anwendung konzentriert sich auf die von der LVM vorgegeben
 
 <p><img src="https://cloud.githubusercontent.com/assets/17273219/15666847/40b57fcc-2713-11e6-9606-1525d7bd8cd2.png" alt="Fachliches Model"></p>
 
-<p>Die Anwendung soll kundenzentriert aufgebaut sein, wie in einem CRM. Darunter verstehen wir, dass die Anwendung alle Informationen zu dem Kunden anzeigen soll. Aus der Kundenübersicht soll der Vertreter oder Innendienst-Mitarbeiter in die einzelnen Versicherungsprodukte verzweigen, sieht dabei jedoch weiterhin die allgemeinen Daten des Kunden.</p>
+<p>Analog zu anderen CRM Applikationen soll auch im Prototyp der Endkunde im Fokus stehen. Darunter verstehen wir, dass die Anwendung alle Informationen zu dem Kunden anzeigen soll. Aus der Kundenübersicht soll der Vertreter oder Innendienst-Mitarbeiter in die jeweiligen Versicherungsprodukte verzweigen, sieht dabei jedoch weiterhin die wichtigsten Kopfdaten des Kunden.</p>
 
 <p>Die einzelnen Anwendungen sollen fachlich verknüpft sein, wie z.B. das Angebots-/Antragssystem mit dem Vertragssystem. Auf Grund dessen soll eine einfache Interaktion zwischen den Anwendungen möglich sein, d.h. der Sprung z.B. aus dem Vertrag in dazugehörige Schäden oder die Anzeige von Schadeninformationen innerhalb der Vertragsübersicht soll realisierbar sein.</p>
 
@@ -86,7 +86,7 @@ Das Einsatzgebiet der Anwendung konzentriert sich auf die von der LVM vorgegeben
 
 <p>Die <strong>Komplexität der Formulare</strong> umfasst eine Vielzahl von Attributen und mehrere Struktur-Ebenen (1:n:m...), die in der Oberfläche abgebildet werden sollen. Die Schwierigkeit besteht darin, eine umfangreiche und komplexe Struktur einfach und verständlich darzustellen und das Maximum an Bedienbarkeit zu gewährleisten.</p>
 
-<p>In der Bearbeitung von Vorgängen (z.B. Angebotserstellung) kann es durch Kundenkontakt (Anruf oder persönlich in der Agentur) zu Unterbrechungen kommen. Deshalb soll der aktuelle Vorgang zur Seite gelegt, der Kunde bedient und anschließend mit dem vorherigen Vorgang fortgefahren werden können. Ebenso sollte es möglich sein, bestimmte Formulare parallel bearbeiten zu können (z.B. mehrere Angebotsvarianten, die man dem Kunden vorstellt). Der Wechsel  zwischen den Formularen soll schnell und einfach funktionieren, außerdem sollte der Überblick über alle geöffneten Formulare vorhanden sein.</p>
+<p>In der Bearbeitung von Vorgängen (z.B. Angebotserstellung) kann es durch Kundenkontakt (Anruf oder persönlich in der Agentur) zu Unterbrechungen kommen. Deshalb soll der aktuelle Vorgang zur Seite gelegt, der Kunde bedient werden. Anschließend soll mit dem ursprünglichen Vorgang fortgefahren werden können. Ebenso sollte es möglich sein, bestimmte Formulare parallel bearbeiten zu können (z.B. mehrere Angebotsvarianten, die man dem Kunden vorstellt). Der Wechsel zwischen den Formularen soll schnell und einfach funktionieren, außerdem sollte der Überblick über alle geöffneten Formulare vorhanden sein.</p>
 
 <h2>
 <a id="technische-anforderungen" class="anchor" href="#technische-anforderungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Technische Anforderungen</h2>
@@ -95,15 +95,15 @@ Das Einsatzgebiet der Anwendung konzentriert sich auf die von der LVM vorgegeben
 
 <p>Die Szenarien des Innendienstes sind primär <strong>prozessorientiert</strong> und werden mittels einer Aufgabenliste durch den Sachbearbeiter angestoßen bzw. abgearbeitet. Daher haben wir im nachfolgenden Absatz die Szenarien mit Formularen, Wizard und einer Aufgabenliste formuliert. Das prozessorientierte Vorgehen zeigt sich darin, dass z.B. der Sachbearbeiter seine Aufgabenliste (Briefkasten) aufruft und dort einen einzelnen Eintrag öffnet. Von dort kann er in den Bezug (z.B. Vertrag oder Schaden) verzweigen und ihn ggf. dort bearbeiten. Nach der Bearbeitung wird dieser Bezug geschlossen und die Aufgabenliste wird wieder angezeigt. Dieser Prozess kann mehrere Ebenen haben (z.B. Aufgabenliste -&gt; Vertrag -&gt; Schaden), was im Prototypen abgebildet werden soll.</p>
 
-<p>Formularfelder haben teilweise fachliche Abhängigkeiten untereinander: z.B. müssen bei der Veränderung eines beitragsrelevanten Feldes alle Ergebnisfelder abgelöscht werden. Dies soll clientseitig direkt ausgeführt werden.</p>
+<p>Formularfelder haben teilweise fachliche Abhängigkeiten untereinander: z.B. müssen bei der Veränderung eines beitragsrelevanten Feldes alle Ergebnisfelder abgelöscht werden. Dies soll direkt im Client ohne Interaktion mit dem Server ausgeführt werden.</p>
 
-<p>Durch die Erfahrung der immer größer werdenden Gesamtanwendung und dem monolithischen System soll das zukünftige System <strong>modular</strong> aufgebaut werden, d.h. dass einzelne Anwendungsteile (Schaden, Vertrag, Briefkasten) losgelöst von einander betrieben und deployed werden. Trotz dieser Modularisierung soll eine Integration möglich sein, wobei dies ein <strong>einfacher Link</strong> oder eine eingebundene <strong>Komponente</strong> sein kann. Eine Wiederverwendung von Komponenten soll ermöglicht werden (z.B. Berufsauswahl muss übergreifend zur Verfügung gestellt werden).</p>
+<p>Durch die Erfahrung der immer größer werdenden Gesamtanwendung und dem monolithischen System soll das zukünftige System <strong>modular</strong> aufgebaut werden, d.h. dass einzelne Anwendungsteile (Schaden, Vertrag, Briefkasten) losgelöst von einander betrieben und bereitgestellt werden. Trotz dieser Modularisierung soll eine Integration möglich sein, wobei dies ein <strong>einfacher Link</strong> oder eine eingebundene <strong>Komponente</strong> sein kann. Eine Wiederverwendung von Komponenten muss ermöglicht werden (z.B. Berufsauswahl muss übergreifend zur Verfügung gestellt werden).</p>
 
 <p>Um eine große Anzahl an Oberflächen produzieren zu können, soll ein einheitliches Layout mit zentral bereitgestellten GUI-Komponenten realisiert werden können. Diese Komponenten sollen einfach einzusetzen und leicht erweiterbar sein.</p>
 
-<p>Da die Anwendung auch im Vertrieb verwendet wird, soll sie mit <strong>geringer Bandbreite</strong> und <strong>hoher Latenz</strong> auskommen und trotzdem eine ausreichende UserExperience (UX) bieten.</p>
+<p>Da die Anwendung auch im Vertrieb verwendet wird, soll sie mit <strong>geringer Bandbreite</strong> und <strong>hoher Latenz</strong> auskommen und dennoch eine ausreichende UserExperience (UX) bieten.</p>
 
-<p>Zukünftig wollen wir den Browser als Laufzeitumgebung unserer Anwendungen verwenden und deshalb sollen die nativen Funktionen, wie dauerhafte URLs, Vor- und Zurück-Navigation und Tabs verwendet werden.</p>
+<p>Zukünftig strebt die LVM Versicherung an, den Browser als Laufzeitumgebung für Anwendungen zu verwenden. Daher ist es notwendig, native Funktionen moderner Web-Browser, wie speicherbare URLs, Vor- und Zurück-Navigation und Tabs zu unterstützen.</p>
 
 <h2>
 <a id="szenarien" class="anchor" href="#szenarien" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Szenarien</h2>
