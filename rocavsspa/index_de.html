@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de-de">
+  <head>
+    <meta charset="UTF-8">
+    <title>LVM-IT RoCA vs. SPA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">LVM-IT RoCA vs. SPA</h1>
+      <h2 class="project-tagline">#SPA #RoCA</h2>
+      <h2><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="spa,roca">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+ <g:plusone></g:plusone></h2>
+    </section>
+    <center><h3> <a href ="index.html" vlink="white">en</a> | de</h3></center>
+    <section class="main-content">
+      <h1>
+<a id="anforderungen" class="anchor" href="#anforderungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Anforderungen</h1>
+
+<h2>
+<a id="einleitung" class="anchor" href="#einleitung" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Einleitung</h2>
+
+<p>Im Jahr 2000 hat die <a href="http://www.lvm.de">LVM Versicherung</a> ein neues Außendienst-System entworfen, welches zur Akquise und Kundenstammdatenverwaltung im Sinne einer Customer Relationship Management-Anwendung (CRM) eingesetzt wird. Es wurde entschieden, das System sowohl auf Server- als auch auf Client-Seite in Java zu implementieren. Der Client wurde mit der Java Swing-Bibliothek als Thin-Client entwickelt. Dieser wurde so implementiert, dass Views im Client definiert werden während die Befüllung und jegliche Interaktion vom Server aus gesteuert wird. Somit ist im Client weder Business- noch Anwendungslogik enthalten.</p>
+
+<p>Die einzelnen Anwendungen in dem System (z.B. Produkt-Anwendung und Inkasso-Anwendung) sind dabei über die Oberfläche sowie über Backend-Aufrufe miteinander verknüpft. Dieses System wird aktuell als Monolith freigegeben und erzeugt dadurch starke Abhängigkeiten zwischen den Entwicklungsteams. Die Fachlogik aus dem System wird in REST- und asynchronen (Batch sowie Einzelsatz) Anwendungen wiederverwendet.</p>
+
+<p>Das System ist über die Jahre weiter gewachsen: Es wurde insbesondere um Vertrags- und Schaden-Anwendungen für Innendienstsachbearbeiter erweitert und ist heute zentrales Arbeitsinstrument vieler Mitarbeiter im Innen- und Außendienst. Zukünftig werden weitere Altanwendungen in dieses System migriert.</p>
+
+<p>Aktuell wird untersucht, welche Alternativen es zu der aktuellen Oberfläche gibt und welche für die LVM Versicherung geeignet ist. Dabei wurde der Fokus auf browserbasierte Oberflächen gelegt, da desktopbasierte native Bibliotheken zukünftige Plattformwechsel erschweren würden. Aktuell verwendet die LVM Versicherung ein auf Ubuntu basierendes Client-Betriebssystem.</p>
+
+<p>Um diese Alternativen zu betrachten, wurden die Architekturen Single-Page-Application (SPA) und <a href='http://roca-style.org/'>Resource-oriented Client Architecture (RoCA)</a> untersucht. SPA erzeugt auf der Client-Seite HTML, während ROCA dies ausschließlich auf der Server-Seite tut. Es gibt noch weitere Architekturen der serverseitigen HTML-Erzeugung, wie zustandsbehaftete komponenten-basierte Systeme (z.B. JavaServerFaces). Diese haben den Nachteil, dass sie durch nicht persistente Sitzungs-Daten schlechter skalierbar und in Cloud-Umgebungen nicht einsetzbar sind. Daher wurden diese Architekturvarianten ausgeschlossen.</p>
+
+<p>Für die genauere Betrachtung wurden die Firmen innoQ (RoCA) und Thinktecture (SPA) beauftragt, Prototypen zu entwickeln, die die nachfolgend beschriebenen Anforderungen und Szenarien abdecken.</p>
+
+<h2>
+<a id="entwickler-von-innoq" class="anchor" href="#entwickler-von-innoq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Entwickler von innoQ</h2>
+
+<ul>
+<li><a href="https://twitter.com/moonbeamlabs">Lucas Dohmen</a></li>
+<li><a href="https://twitter.com/marcjansing">Marc Jansing</a></li>
+</ul>
+
+<h2>
+<a id="entwickler-von-thinktecture" class="anchor" href="#entwickler-von-thinktecture" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Entwickler von Thinktecture</h2>
+
+<ul>
+<li><a href="https://twitter.com/ThorstenHans">Thorsten Hans</a></li>
+<li><a href="https://twitter.com/ManuelRauber">Manuel Rauber</a></li>
+</ul>
+
+<h1>
+<a id="ziel-der-veröffentlichung-auf-github" class="anchor" href="#ziel-der-ver%C3%B6ffentlichung-auf-github" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ziel der Veröffentlichung auf GitHub</h1>
+
+<p>Nach der erfolgten Umsetzung der beiden Prototypen wollen wir, die LVM Versicherung, beide Lösungsansätze hiermit der Allgemeinheit zur Verfügung stellen, um eine öffentliche Diskussion über die Vor- und Nachteile beider Architekturen anzustoßen.</p>
+
+<p>Mit welchen Fragestellungen beschäftigen wir uns?</p>
+
+<ul>
+<li>Für welche Anforderungen kann welche Architektur eingesetzt werden? (Content-basierte Seiten, native Anbindung, Mobiler Einsatz,...)</li>
+<li>Welche Architektur ist langfristig tragfähig?</li>
+<li>Ist eine Architektur für eine große Gruppe von Entwicklern besser geeignet? (Produktivität, Skill, Organisation, Schnittstellen,...)</li>
+<li>Welche Architektur lässt sich besser modularisieren?  Wichtig ist dabei, dass die Anwendung weiterhin komfortabel integriert sind?</li>
+</ul>
+
+<h2>
+<a id="rahmenbedingungen" class="anchor" href="#rahmenbedingungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rahmenbedingungen</h2>
+
+<p>Da wir vorwiegend die Clientarchitektur untersuchen möchten, haben wir die fachlichen Services als <a href="https://github.com/LVM-IT/prototype-backend">Backend-Mock</a> in Form von REST-Services bereitgestellt.
+Das Einsatzgebiet der Anwendung konzentriert sich auf die von der LVM vorgegebene Infrastruktur. Daher reicht es aus, einen Browser (z.Z. Firefox) zu unterstützen.  </p>
+
+<h2>
+<a id="fachliche-anfoderungen" class="anchor" href="#fachliche-anfoderungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Fachliche Anfoderungen</h2>
+
+<p><img src="https://cloud.githubusercontent.com/assets/17273219/15666847/40b57fcc-2713-11e6-9606-1525d7bd8cd2.png" alt="Fachliches Model"></p>
+
+<p>Analog zu anderen CRM Applikationen soll auch im Prototyp der Endkunde im Fokus stehen. Darunter verstehen wir, dass die Anwendung alle Informationen zu dem Kunden anzeigen soll. Aus der Kundenübersicht soll der Vertreter oder Innendienst-Mitarbeiter in die jeweiligen Versicherungsprodukte verzweigen, sieht dabei jedoch weiterhin die wichtigsten Kopfdaten des Kunden.</p>
+
+<p>Die einzelnen Anwendungen sollen fachlich verknüpft sein, wie z.B. das Angebots-/Antragssystem mit dem Vertragssystem. Auf Grund dessen soll eine einfache Interaktion zwischen den Anwendungen möglich sein, d.h. der Sprung z.B. aus dem Vertrag in dazugehörige Schäden oder die Anzeige von Schadeninformationen innerhalb der Vertragsübersicht soll realisierbar sein.</p>
+
+<p>Durch die <strong>Integration</strong> verschiedener fachlicher Anwendungen wirkt die Gesamtanwendung gut bedienbar und somit komfortabel.  Neben den kundenzentrierten Anwendungen gibt es einzelne unabhängige Anwendungen (wie z.B. Finanzrechner), die ebenso leicht erreichbar sein müssen. Die Integration ist hier durch eine sehr dünne Kopplung an der Oberfläche möglich.</p>
+
+<p>Die <strong>Komplexität der Formulare</strong> umfasst eine Vielzahl von Attributen und mehrere Struktur-Ebenen (1:n:m...), die in der Oberfläche abgebildet werden sollen. Die Schwierigkeit besteht darin, eine umfangreiche und komplexe Struktur einfach und verständlich darzustellen und das Maximum an Bedienbarkeit zu gewährleisten.</p>
+
+<p>In der Bearbeitung von Vorgängen (z.B. Angebotserstellung) kann es durch Kundenkontakt (Anruf oder persönlich in der Agentur) zu Unterbrechungen kommen. Deshalb soll der aktuelle Vorgang zur Seite gelegt, der Kunde bedient werden. Anschließend soll mit dem ursprünglichen Vorgang fortgefahren werden können. Ebenso sollte es möglich sein, bestimmte Formulare parallel bearbeiten zu können (z.B. mehrere Angebotsvarianten, die man dem Kunden vorstellt). Der Wechsel zwischen den Formularen soll schnell und einfach funktionieren, außerdem sollte der Überblick über alle geöffneten Formulare vorhanden sein.</p>
+
+<h2>
+<a id="technische-anforderungen" class="anchor" href="#technische-anforderungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Technische Anforderungen</h2>
+
+<p>Anwendungen insbesondere im Innendienst bestehen aus vielen Formulardaten, die vom Sachbearbeiter verarbeitet werden. In der Regel werden die Formulardaten bearbeitet, automatisch geprüft und gesichert. Neben den Formularen werden Wizards zur geführten Eingabe verwendet. Diese umfangreichen und z.T. komplexen Formulare sollen in den Prototypen abgebildet werden.</p>
+
+<p>Die Szenarien des Innendienstes sind primär <strong>prozessorientiert</strong> und werden mittels einer Aufgabenliste durch den Sachbearbeiter angestoßen bzw. abgearbeitet. Daher haben wir im nachfolgenden Absatz die Szenarien mit Formularen, Wizard und einer Aufgabenliste formuliert. Das prozessorientierte Vorgehen zeigt sich darin, dass z.B. der Sachbearbeiter seine Aufgabenliste (Briefkasten) aufruft und dort einen einzelnen Eintrag öffnet. Von dort kann er in den Bezug (z.B. Vertrag oder Schaden) verzweigen und ihn ggf. dort bearbeiten. Nach der Bearbeitung wird dieser Bezug geschlossen und die Aufgabenliste wird wieder angezeigt. Dieser Prozess kann mehrere Ebenen haben (z.B. Aufgabenliste -&gt; Vertrag -&gt; Schaden), was im Prototypen abgebildet werden soll.</p>
+
+<p>Formularfelder haben teilweise fachliche Abhängigkeiten untereinander: z.B. müssen bei der Veränderung eines beitragsrelevanten Feldes alle Ergebnisfelder abgelöscht werden. Dies soll direkt im Client ohne Interaktion mit dem Server ausgeführt werden.</p>
+
+<p>Durch die Erfahrung der immer größer werdenden Gesamtanwendung und dem monolithischen System soll das zukünftige System <strong>modular</strong> aufgebaut werden, d.h. dass einzelne Anwendungsteile (Schaden, Vertrag, Briefkasten) losgelöst von einander betrieben und bereitgestellt werden. Trotz dieser Modularisierung soll eine Integration möglich sein, wobei dies ein <strong>einfacher Link</strong> oder eine eingebundene <strong>Komponente</strong> sein kann. Eine Wiederverwendung von Komponenten muss ermöglicht werden (z.B. Berufsauswahl muss übergreifend zur Verfügung gestellt werden).</p>
+
+<p>Um eine große Anzahl an Oberflächen produzieren zu können, soll ein einheitliches Layout mit zentral bereitgestellten GUI-Komponenten realisiert werden können. Diese Komponenten sollen einfach einzusetzen und leicht erweiterbar sein.</p>
+
+<p>Da die Anwendung auch im Vertrieb verwendet wird, soll sie mit <strong>geringer Bandbreite</strong> und <strong>hoher Latenz</strong> auskommen und dennoch eine ausreichende UserExperience (UX) bieten.</p>
+
+<p>Zukünftig strebt die LVM Versicherung an, den Browser als Laufzeitumgebung für Anwendungen zu verwenden. Daher ist es notwendig, native Funktionen moderner Web-Browser, wie speicherbare URLs, Vor- und Zurück-Navigation und Tabs zu unterstützen.</p>
+
+<h2>
+<a id="szenarien" class="anchor" href="#szenarien" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Szenarien</h2>
+
+<p>Mit den Szenarien wollen wir die grundlegenden Anforderungen abbilden. Diese müssen durch folgende Anwendungen in eigenen Modulen umgesetzt werden: Kundensuche und Kundenübersicht (Rahmenanwendung), Aufgabenliste (modulare Anwendung), Brieferzeugung (Wizard), Berufsauswahl (modulare Komponente), Schaden (modulare Anwendung) </p>
+
+<h3>
+<a id="szenario-1-kundengespräch-mit-schadenaufnahme" class="anchor" href="#szenario-1-kundengespr%C3%A4ch-mit-schadenaufnahme" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Szenario 1: "Kundengespräch mit Schadenaufnahme"</h3>
+
+<p>Über einen Dialog wird der Kunde über seinen Namen und weitere Kriterien gesucht. In der Ergebnisliste wird ein Kunde ausgewählt und geöffnet. In der geöffneten Kundenübersicht werden allgemeine Informationen zu dem Kunden, wie Kontakthistorie, Angebote, Anträge und Verträge angezeigt.
+Über einen Button öffnet sich ein neues Angebot, in dem das Geburtstagsdatum und die Anschrift des zuvor ausgewählten Kunden vorbelegt sind. Die Berechnen-Funktion wird aufgerufen und es erscheint ein Fehlerdialog mit mehreren Meldungen. Über die Fehlermeldungen kann zu den fehlerhaften Feldern navigiert werden.</p>
+
+<p>Eine weitere Anwendungskomponente stellt die Funktion der Berufssuche zur Verfügung. Über diese wird ein Beruf im Angebot erfasst.</p>
+
+<p>Nachdem der Anwender das Angebot gesichert hat, kopiert er das Angebot und öffnet damit beide Angebote parallel.
+Zwischenzeitlich wird ein weiterer Kunde über die Kundensuche mittels der Vertragsnummer geöffnet. Zu diesem Vertrag erfolgt eine Schadenserfassung. Anschließend wird der erste Kunde als offener Vorgang erneut geöffnet. Alle offenen Vorgänge (Angebote) zu dem Kunden werden geschlossen - es erscheint der Hinweis auf ungesicherte Daten.</p>
+
+<h3>
+<a id="szenario-2-integration-und-zusammenspiel-von-anwendungen" class="anchor" href="#szenario-2-integration-und-zusammenspiel-von-anwendungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Szenario 2: "Integration und Zusammenspiel von Anwendungen"</h3>
+
+<p>Die Aufgabenliste wird geöffnet und zeigt eine Liste aller Einträge an. Einem Eintrag kann ein Bezug (z.B. Vertrag, Schaden) zugeordnet sein. Ist ein Bezug zugeordnet, erhält der Anwender die Möglichkeit, in die entsprechende Anwendung zu verzweigen. Wird die geöffnete Anwendung geschlossen, wird erneut die Aufgabenliste dargestellt.</p>
+
+<h3>
+<a id="szenario-3-wizard" class="anchor" href="#szenario-3-wizard" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Szenario 3: "Wizard"</h3>
+
+<p>Innerhalb der Vertragsanwendung soll eine Brieferstellung per Wizard möglich sein. Hierzu werden in einzelnen Schritten (Dokumentenauswahl, Empfängerauswahl, Zusammenfassung) die benötigten Informationen zur Brieferstellung zusammengetragen.</p>
+
+<h1>
+<a id="github-repos" class="anchor" href="#github-repos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Github-Repos</h1>
+
+<p>Um die unterschiedlichen Prototypen zu starten, benötigt man das Backend-Mock und die Repositories der jeweiligen Architektur. In den Repositories befinden sich README-Dateien als Anleitungen für die Installation und Ausführung der Anwendungen.</p>
+
+<h2>
+<a id="backend-mock" class="anchor" href="#backend-mock" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Backend-Mock:</h2>
+
+<ul>
+<li><a href="https://github.com/LVM-IT/prototype-backend">https://github.com/LVM-IT/prototype-backend</a></li>
+</ul>
+
+<h2>
+<a id="roca-anwendungen" class="anchor" href="#roca-anwendungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>RoCA Anwendungen:</h2>
+
+<ul>
+<li><a href="https://github.com/LVM-IT/roca-las">Hauptanwendung</a></li>
+<li><a href="https://github.com/LVM-IT/roca-las-damage">Schadenanwendung</a></li>
+<li><a href="https://github.com/LVM-IT/roca-las-postbox">Aufgabenliste (Briefkasten)</a></li>
+<li><a href="https://github.com/LVM-IT/roca-las-letter">Briefschreibung (Wizard)</a></li>
+<li><a href="https://github.com/LVM-IT/roca-las-assets">Allgemeine Assets</a></li>
+</ul>
+
+<h2>
+<a id="spa-anwendungen" class="anchor" href="#spa-anwendungen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SPA Anwendungen</h2>
+
+<ul>
+<li><a href="https://github.com/LVM-IT/spa-prototype">https://github.com/LVM-IT/spa-prototype</a></li>
+</ul>
+
+<p>Darin enthalten:</p>
+
+<ul>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src">Hauptanwendung</a></li>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src-contract-app">Vertraganwendung</a></li>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src-job-search-app">Berufssuche</a></li>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src-wizard-app">Briefschreibung (Wizard)</a></li>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src-schufa-app">Schufaanwendung</a></li>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src-core">Allgemeine Bibliothek</a></li>
+</ul>
+
+<h1>
+<a id="links" class="anchor" href="#links" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Links</h1>
+
+<ul>
+<li><a href="https://blog.codecentric.de/en/2013/03/spa-application-angularjs-requirejs-roca-spring/">Diskussion zu SPA und RoCA bei Codecentric</a></li>
+<li><a href="http://tatiyants.com/are-single-page-apps-bad/">Blog zu SPA und RoCA</a></li>
+<li><a href="https://twitter.com/search?q=%23roca%20%23spa&amp;src=typd">Diskussion auf Twitter zu #roca und #spa</a></li>
+<li><a href="https://www.innoq.com/en/articles/2013/06/roca-modell-fuer-die-native-webentwicklung/">Im Web zu Hause / ROCA – Modell für die native Webentwicklung</a></li>
+<li><a href="http://roca-style.org/">Resource-oriented Client Architecture</a></li>
+
+</ul>
+
+<h1>
+<a id="ansprechpartner" class="anchor" href="#ansprechpartner" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ansprechpartner</h1>
+
+<ul>
+<li><a href="https://twitter.com/cpiepel_de">Carsten Piepel</a></li>
+<li><a href="https://twitter.com/gruenyC">Christian Grünberg</a></li>
+<li><a href="https://twitter.com/hillmann_h">Stephan Hillmann</a></li>
+</ul>
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'LVM-IT/spa_roca_battle'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+
+      <footer class="site-footer">
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>

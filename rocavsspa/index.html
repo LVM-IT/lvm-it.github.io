@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>LVM-IT RoCA vs. SPA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">LVM-IT RoCA vs. SPA</h1>
+      <h2 class="project-tagline">#SPA #RoCA</h2>
+       <h2><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="spa,roca">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+ <g:plusone></g:plusone></h2>
+    </section>
+
+    <section class="main-content">
+      <center><h3>en | <a href ="index_de.html" vlink="white" >de</a></h3></center>
+      <h1>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h1>
+
+<h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>In 2000 the <a href="http://www.lvm.de">LVM</a> designed a new software system for the sales staff in its agencies. The system's core functions were those of a customer relationship management system, namely client acquisition and general management of client data. It was decided to implement the system in Java - on the server side as well as on the client side. The client was developed as a thin client using the Java Swing library. The implementation was done in such a way, that views are defined on the client side, but are populated and controlled exclusively on the server side. Therefore, there is neither business nor application logic on the client.</p>
+
+<p>The individual business applications within the software - e.g. the product application and the collections application - are integrated within the client user interface and are connected by back-end calls. Currently the system is released as a monolith, which causes strong dependencies between development teams. Parts of the system's business logic are reused within other batch, web (REST) and message driven applications.</p>
+
+<p>The system has been growing steadily over the last years. Most noteworthy are the addition of contract and claims applications for the back-office staff. Today the system is the central working tool for many employees, both in administration and in the field. More legacy applications will be migrated into this system in the future.</p>
+
+<p>Currently, a study of alternative user interface technologies is being conducted to find out which of them might best fit the needs of the LVM. Focus has been put on browser-based user interfaces, because native user interface libraries would impede the ability to switch platforms in the future. At present, the LVM uses a desktop operating system which is based on Ubuntu.</p>
+
+<p>The alternative client architectures "single-page application" (SPA) and <a href='http://roca-style.org/'>"resource-oriented client architecture" (RoCA)</a> were examined in more detail. A single-page application renders HTML on the client side, a RoCA application does this on the server side. There are other architectures using server side rendering of HTML, like stateful component-based systems (e.g. Java Server Faces). These architectures are based on a non-persistent session state, which reduces scalability and obstructs the adoption of cloud technologies. Because of these disadvantages, stateful architectures were dismissed as viable options.</p>
+
+<p>To perform a more detailed examination, the companies innoq (RoCA) and thinktecture (SPA) were commissioned to each develop a prototype application. The underlying requirements and use cases are described further below. </p>
+
+<h2>
+<a id="innoq-developers" class="anchor" href="#innoq-developers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>innoQ developers</h2>
+
+<ul>
+<li><a href="https://twitter.com/moonbeamlabs">Lucas Dohmen</a></li>
+<li><a href="https://twitter.com/marcjansing">Marc Jansing</a></li>
+</ul>
+
+<h2>
+<a id="thinktecture-developers" class="anchor" href="#thinktecture-developers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>thinktecture developers</h2>
+
+<ul>
+<li><a href="https://twitter.com/ThorstenHans">Thorsten Hans</a></li>
+<li><a href="https://twitter.com/ManuelRauber">Manuel Rauber</a></li>
+</ul>
+
+<h1>
+<a id="purpose-of-the-publication-on-github" class="anchor" href="#purpose-of-the-publication-on-github" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Purpose of the publication on github</h1>
+
+<p>The implementation of both prototypes has been completed by now. We decided to make them publicly available to initiate a debate about the pros and cons of both architectures.                             </p>
+
+<p>Some of our questions and points of discussion:</p>
+
+<ul>
+<li>Which requirements are met by which architecture? (content-based pages, integration of native devices or hardware components, mobile devices)</li>
+<li>Which architecture is sustainable in the long-term?</li>
+<li>Which architecture is more suitable for large and/or many development teams? (productivity, skill, work organisation, coordination, interfaces)</li>
+<li>Which architecture lends itself better to modularisation while still being able to offer a high degree of comfort to the user. </li>
+</ul>
+
+<h2>
+<a id="general-set-up" class="anchor" href="#general-set-up" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>General set-up</h2>
+
+<p>Primarily, we wanted concentrate on the client side of the architecture. This is why we provided the business back-end as a collection of RESTful mock services.</p>
+
+<p>The application should confine itself to the predefined LVM infrastructure. Therefore it was sufficient to support only one specific browser, namely Firefox.  </p>
+
+<h2>
+<a id="business-requirements" class="anchor" href="#business-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Business requirements</h2>
+
+<p><img src="https://cloud.githubusercontent.com/assets/17273219/15735943/aa993b60-289c-11e6-99ad-d23c48fe640c.png" alt="Business requirements"></p>
+
+<p>The application ought to be centered around the customer, similar to a CRM. By this we mean that the application should present all the relevant information pertaining to one customer.
+From this customer summary the user should be able to navigate to the different insurance products, while still being able to see the customer's general data.</p>
+
+<p>The sub-applications - e.g. the claims and the contract application - often have business dependencies among each other. This is why the architecture should enable the effortless interaction between sub-applications. It should, for example, be possible to navigate from an insurance contract to each of its associated claims or to display claim data in an insurance contract summary view.</p>
+
+<p>By integrating different business sub-applications, the application as a whole obtains a better usability and offers more comfort to the user. Beside the customer centered sub-applications there are also several independent applications - like a financial calculator - which should also be easily accessible. A loose UI integration would be sufficient for these applications. </p>
+
+<p>The user interface has to present intricate input forms with many attributes and several nesting levels (1:n:m). The challenge lies in presenting these complex structures in a simple and comprehensible way, while still maintaining a maximum of usability.</p>
+
+<p>While working on a business process - like drawing up an insurance offer - the sales rep may always be interrupted by a customer - on the phone or in person.
+Therefore, the user should be able to put aside the current process, serve the client, and then resume the former business process.                                                                                                                                                           </p>
+
+<p>It should also be possible to work on several forms in parallel, for example to present different insurance alternatives to a client.
+The transition between forms ought to be quick and straightforward. There should also be an overview of all open forms.</p>
+
+<h2>
+<a id="technical-requirements" class="anchor" href="#technical-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Technical requirements</h2>
+
+<p>Insurance applications - in particular those for the back-office staff - have a lot of form data which is entered by the user. Usually, form data is filled in manually, validated automatically against a set of business rules and then stored persistently. In some cases wizards are used to guide the user's input. The prototypes should implement these elaborate and sometimes complex input forms.</p>
+
+<p>The back-office use cases are primarily process oriented and are initiated from the user's personal task list. This is why we chose use cases centered around data forms, wizards and a task list. The use cases are described in the next paragraph.</p>
+
+<p>In a process oriented workflow the user typically calls up his task list (postbox) and opens a single task. A task has a reference - for example a contract or a claim - to which the user can navigate, to perform the actual business process. After the user has finished, the reference is closed and the task list is displayed again. The process-chain can have multiple elements (for example task -&gt; contract -&gt; claim), which should be implemented by the prototypes.</p>
+
+<p>Form fields sometimes have business dependencies: when a form field, which contributes to the insurance premium, is changed, all result fields have to be cleared, for example. This should be done on the client side.</p>
+
+<p>Having a large and growing monolithic system we want the new system to be modular: Single sub-applications (claims, contracts, task list) should be operated and deployed separately from each other.</p>
+
+<p>Integration between applications should still be possible, through a simple link or through embedded components. </p>
+
+<p>Components should be reusable: for example, a component to select an occupation should only be developed once, and then be reused in different contexts.</p>
+
+<p>We want to be able to produce a large number of user interface views with a consistent look and feel. For this reason a uniform layout with centrally provided gui components should be implemented. These  components should be straightforward to use and easy to extend. </p>
+
+<p>The application will also be used in the field and should therefore be able to deal with low bandwidth and high latency while still delivering a satisfying user experience (ux). </p>
+
+<p>The browser will be the future platform for most of our applications and therefore native browser functions, like forward and backward navigation, browser tabs and permanent URLs should be used.</p>
+
+<h2>
+<a id="use-cases" class="anchor" href="#use-cases" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use cases</h2>
+
+<p>The following use cases cover the most fundamental requirements for the new system. They have to be implemented in separate modules: customer search and customer summary (frame application), task list (modular application), business letter (wizard), occupation search (modular component) and claims (modular application). </p>
+
+<h3>
+<a id="use-case-1-customer-conversation-with-first-notice-of-claim" class="anchor" href="#use-case-1-customer-conversation-with-first-notice-of-claim" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case 1: "Customer conversation with first notice of claim"</h3>
+
+<p>The sales rep opens a dialogue to search for the customer by his name and further criteria. A customer is chosen from the search result list and the related customer summary view is opened. It contains general information pertaining to the customer, like a contact history, insurance quotes, applications and contracts.</p>
+
+<p>A new insurance quote is brought up by pressing a button. The address and date of birth of the current customer are preassigned. The user initiates the premium computation, which brings up an error dialogue containing multiple messages. The user can navigate from each error message to the corresponding erroneous field.</p>
+
+<p>The customer's occupation is selected by using the aforementioned occupation search component.</p>
+
+<p>The user saves the quote and copies it. Now two quotes are opened up simultaneously.</p>
+
+<p>In the meantime, another customer is opened up by a search based on one of his contract numbers. A notice of claim pertaining to the second customer's contract is recorded. Afterwards, the first customer is brought up again. All active business processes of this customer - i.e. the two insurance quotes - are closed. A notification about unsaved data is presented to the user.</p>
+
+<h3>
+<a id="use-case-2-integration-and-interaction-between-applications" class="anchor" href="#use-case-2-integration-and-interaction-between-applications" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case 2: "Integration and interaction between applications"</h3>
+
+<p>The user's task list is opened and shows a list of all entries. Each entry can contain a reference (e.g. claim or contract).
+If the entry has a reference the user can navigate to the corresponding application. When the application is closed, the task list will be displayed, again.</p>
+
+<h3>
+<a id="use-case-3-wizard" class="anchor" href="#use-case-3-wizard" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case 3: "Wizard"</h3>
+
+<p>Within the contract application a business letter can be composed using a wizard-based user interface. All the necessary information (document selection, recipient selection, summary) is collected step by step.</p>
+
+<h1>
+<a id="github-repositories" class="anchor" href="#github-repositories" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Github-Repositories</h1>
+
+<p>To be able to start the prototypes, the repository of the back-end mock-services and the repositories of each architecture are needed.
+There are readme files in all the repositories which contain instructions on how to install and start the applications.</p>
+
+<h2>
+<a id="backend-mock" class="anchor" href="#backend-mock" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Backend-Mock:</h2>
+
+<ul>
+<li><a href="https://github.com/LVM-IT/prototype-backend">https://github.com/LVM-IT/prototype-backend</a></li>
+</ul>
+
+<h2>
+<a id="roca-applications" class="anchor" href="#roca-applications" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>RoCA applications:</h2>
+
+<ul>
+<li><a href="https://github.com/LVM-IT/roca-las">Main application</a></li>
+<li><a href="https://github.com/LVM-IT/roca-las-damage">Claim application</a></li>
+<li><a href="https://github.com/LVM-IT/roca-las-postbox">Task list (postbox)</a></li>
+<li><a href="https://github.com/LVM-IT/roca-las-letter">Business letter (wizard)</a></li>
+<li><a href="https://github.com/LVM-IT/roca-las-assets">General assets</a></li>
+</ul>
+
+<h2>
+<a id="spa-applications" class="anchor" href="#spa-applications" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SPA applications</h2>
+
+<ul>
+<li><a href="https://github.com/LVM-IT/spa-prototype">https://github.com/LVM-IT/spa-prototype</a></li>
+</ul>
+
+<p>which contains::</p>
+
+<ul>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src">Main application</a></li>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src-contract-app">Contract application</a></li>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src-job-search-app">Occupation search</a></li>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src-wizard-app">Business letter (wizard)</a></li>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src-schufa-app">Schufa application</a></li>
+<li><a href="https://github.com/LVM-IT/spa-prototype/tree/master/src-core">General library</a></li>
+</ul>
+
+<h1>
+<a id="links" class="anchor" href="#links" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Links</h1>
+
+<ul>
+<li><a href="https://blog.codecentric.de/en/2013/03/spa-application-angularjs-requirejs-roca-spring/">Codecentric discussion about SPA and RoCA</a></li>
+<li><a href="http://tatiyants.com/are-single-page-apps-bad/">Blog about SPA and RoCA</a></li>
+<li><a href="https://twitter.com/search?q=%23roca%20%23spa&amp;src=typd">Discussion on Twitter about #roca and #spa</a></li>
+<li><a href="https://www.innoq.com/en/articles/2013/06/roca-modell-fuer-die-native-webentwicklung/">Im Web zu Hause / ROCA – Modell für die native Webentwicklung</a></li>
+<li><a href="http://roca-style.org/">Resource-oriented Client Architecture</a></li>
+</ul>
+
+<h1>
+<a id="contact" class="anchor" href="#contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contact</h1>
+
+<ul>
+<li><a href="https://twitter.com/cpiepel_de">Carsten Piepel</a></li>
+<li><a href="https://twitter.com/gruenyC">Christian Grünberg</a></li>
+<li><a href="https://twitter.com/hillmann_h">Stephan Hillmann</a></li>
+</ul>
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+    room: 'LVM-IT/spa_roca_battle'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+      <footer class="site-footer">
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
