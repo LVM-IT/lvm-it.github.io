@@ -1,0 +1,809 @@
+<!doctype html>
+
+<!--
+
+    Welcome to the light side of the source, young padawan.
+
+    One step closer to learn something interesting you are...
+
+                               ____                  
+                            _.' :  `._               
+                        .-.'`.  ;   .'`.-.           
+               __      / : ___\ ;  /___ ; \      __  
+             ,'_ ""=-.:__;".-.";: :".-.":__;.-="" _`,
+             :' `.t""=-.. '<@.`;_  ',@:` ..-=""j.' `;
+                  `:-.._J '-.-'L__ `-.-' L_..-;'     
+                    "-.__ ;  .-"  "-.  : __.-"       
+                        L ' /.======.\ ' J           
+                         "-.   "__"   .-"            
+                        __.l"-:_JL_;-";.__           
+                     .-j/'.;  ;""""  / .'\"-.        
+                   .' /:`. "-.:     .-" .';  `.      
+                .-"  / ;  "-. "-..-" .-"  :    "-.   
+             .+"-.  : :      "-.__.-"      ;-._   \  
+             ; \  `.; ;                    : : "+. ; 
+             :  ;   ; ;                    : ;  : \: 
+             ;  :   ; :                    ;:   ;  : 
+            : \  ;  :  ;                  : ;  /  :: 
+            ;  ; :   ; :                  ;   :   ;: 
+            :  :  ;  :  ;                : :  ;  : ; 
+            ;\    :   ; :                ; ;     ; ; 
+            : `."-;   :  ;              :  ;    /  ; 
+             ;    -:   ; :              ;  : .-"   : 
+             :\     \  :  ;            : \.-"      : 
+              ;`.    \  ; :            ;.'_..-=  / ; 
+              :  "-.  "-:  ;          :/."      .'  :
+               \         \ :          ;/  __        :
+                \       .-`.\        /t-""  ":-+.   :
+                 `.  .-"    `l    __/ /`. :  ; ; \  ;
+                   \   .-" .-"-.-"  .' .'j \  /   ;/ 
+                    \ / .-"   /.     .'.' ;_:'    ;  
+                     :-""-.`./-.'     /    `.___.'   
+                           \ `t  ._  /               
+                            "-.t-._:'                
+
+-->
+
+<!--
+    
+    So you'd like to know how to use impress.js?
+    
+    You've made the first, very important step - you're reading the source code.
+    And that's how impress.js presentations are built - with HTML and CSS code.
+    
+    Believe me, you need quite decent HTML and CSS skills to be able to use impress.js effectively.
+    More importantly, you need to be a designer. There are no default styles or layouts for impress.js presentations.
+    
+    You need to design and build it by hand.
+    
+    So...
+    
+    Would you still like to know how to use impress.js?
+    
+-->
+
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=1024"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>Die Desktopanwendung ist tot - lang lebe die Single-Page-Application | Christian Grünberg @gruenyC und
+        Michael Füser @floenk</title>
+
+    <meta name="description" content="Die Desktopanwendung ist tot - lang lebe die Single-Page-Application"/>
+    <meta name="author" content="Christian Grünberg, Michael Füser"/>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic"
+          rel="stylesheet"/>
+
+    <!--
+        
+        Impress.js doesn't depend on any external stylesheets. It adds all of the styles it needs for the
+        presentation to work.
+        
+        This style below contains styles only for demo presentation. Browse it to see how impress.js
+        classes are used to style presentation steps, or how to apply fallback styles, but I don't want
+        you to use them directly in your presentation.
+        
+        Be creative, build your own. We don't really want all impress.js presentations to look the same,
+        do we?
+        
+        When creating your own presentation get rid of this file. Start from scratch, it's fun!
+        
+    -->
+    <link href="css/enterjs2.css" rel="stylesheet"/>
+
+    <link rel="shortcut icon" href="favicon.png"/>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+</head>
+
+<!--
+    
+    Body element is used by impress.js to set some useful class names, that will allow you to detect
+    the support and state of the presentation in CSS or other scripts.
+    
+    First very useful class name is `impress-not-supported`. This class means, that browser doesn't
+    support features required by impress.js, so you should apply some fallback styles in your CSS.
+    It's not necessary to add it manually on this element. If the script detects that browser is not
+    good enough it will add this class, but keeping it in HTML means that users without JavaScript
+    will also get fallback styles.
+    
+    When impress.js script detects that browser supports all required features, this class name will
+    be removed.
+    
+    The class name on body element also depends on currently active presentation step. More details about
+    it can be found later, when `hint` element is being described.
+    
+-->
+<body class="impress-not-supported">
+
+<!--
+    For example this fallback message is only visible when there is `impress-not-supported` class on body.
+-->
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified
+        version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<!--
+    
+    Now that's the core element used by impress.js.
+    
+    That's the wrapper for your presentation steps. In this element all the impress.js magic happens.
+    It doesn't have to be a `<div>`. Only `id` is important here as that's how the script find it.
+    
+    You probably won't need it now, but there are some configuration options that can be set on this element.
+    
+    To change the duration of the transition between slides use `data-transition-duration="2000"` giving it
+    a number of ms. It defaults to 1000 (1s).
+    
+    You can also control the perspective with `data-perspective="500"` giving it a number of pixels.
+    It defaults to 1000. You can set it to 0 if you don't want any 3D effects.
+    If you are willing to change this value make sure you understand how CSS perspective works:
+    https://developer.mozilla.org/en/CSS/perspective
+    
+    But as I said, you won't need it for now, so don't worry - there are some simple but interesting things
+    right around the corner of this tag ;)
+    
+-->
+<div id="impress">
+
+
+    <div id="title" class="step try" data-x="-500" data-y="1500" data-z="2000">
+        <!-- Jeder stellt sich vor - Michael stellt Prasei vor -->
+        <!-- Frage: Wer nutzt Web-Technologien in seinen Anwendungen?-->
+        <div class="presentation_title">
+            <span>Die Desktopanwendung ist tot - lang lebe die Single-Page-Application</span>
+        </div>
+        <div class="presentation_title_erg">
+            <span>ein Umstellungsbericht der LVM Versicherung</span>
+        </div>
+        <div class="title_author">
+
+            <p>Michael F&uuml;ser | @floenk</p>
+            <p>Christian Gr&uuml;nberg | @gruenyC</p>
+            <p>@LVM_IT</p>
+
+        </div>
+    </div>
+
+    <div class="step slide" data-x="-1500" data-y="-1200" data-z="-1000">
+        <div class="vcenter">
+            <div class="slide-content">
+                <div id="fragen-image"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="step slide" data-x="0" data-y="-1200" data-z="-1000">
+        <!-- Christian kurz -->
+        <div class="vcenter">
+            <div class="slide-header">Eckdaten</div>
+            <div class="slide-content elevated">
+                <p class="slide-point-tilt1">1896 Gründung des "Haftpflichvereins für Landwirte der Provinz
+                    Westfalen"</p>
+                <p class="slide-point-tilt2">Aktuell - die LVM Versicherung</p>
+                <p class="slide-point-tilt3">Alle Versicherungssparten (KFZ, Rechtsschutz, Sach-, Renten-, Kranken-
+                    Unfall- und Lebensversicherung) werden abgedeckt</p>
+                <p class="slide-point-tilt4">Augsburger Aktienbank</p>
+                <p class="slide-point-tilt5">Beitragseinnamen: 3,3 Mrd Euro bei 3,3 Mio Kunden (2016)</p>
+                <p class="slide-point-tilt6">Innendienst ca 3.600 Mitarbeiter</p>
+                <p class="slide-point-tilt7">über 2300 Agenturinhaber</p>
+               <!-- <p class="slide-point-tilt8">ca. 4,5 Mio Euro Schadenzahlungen pro Tag (2014)</p>-->
+            </div>
+        </div>
+    </div>
+    <div class="step slide" data-x="1500" data-y="-1200" data-z="-1000">
+        <!-- Christian kurz -->
+        <div id="legacy-image"></div>
+    </div>
+
+    <div class="step slide" data-x="1500" data-y="-1200" data-z="-1000" data-rotate-y="180">
+        <!-- Christian  -->
+        <div id="zeitstrahl-image">
+        </div>
+    </div>
+
+    <div class="step slide" data-x="3000" data-y="-1200" data-z="-1000">
+        <!-- Christian  -->
+        <div id="stackholder-image"></div>
+    </div>
+
+    <div class="step slide" data-x="4500" data-y="-1200" data-z="-1000">
+        <!-- Michael -->
+
+        <!--ul>
+            <li>Plattform unabhängig</li>  mehr noch als Java-Swing 
+            <li>Weit verbreiteter Standard</li>
+            <li>Zukunftsicher</li> Wo auch immer die Reise hingeht, der Browser wird weiterhin eine Rolle spielen 
+            <li>Benutzer finden sich zu recht</li>
+            <li>Entwickler-Community sehr stark</li>
+            <li>Entkopplung von der eigentlichen Plattform/BS</li>
+            <li>Alternativen (JavaFX, QT) haben weniger zu bieten</li>  weniger Nutzer, weniger Entwickler - Community
+            <li>Was waren unsere Alternativen?</li>
+        </ul>-->
+         <div id="browser"></div>
+    </div>
+
+
+    <div class="step slide" data-x="7000" data-y="-1200" data-z="5000">
+        <h1>Was ist unsere Zielvision?</h1>
+        <!--
+        LAS komplett im Browser
+        Weitgehend unabhängige Entwicklung der einzelnen Sparten (Tower-Ansatz)
+        -->
+    </div>
+
+    <div class="step slide" data-x="7000" data-y="-1200" data-z="3000">
+        <!-- Besser von Verticals als von Tower sprechen-->
+        <img src="img/Towereinfach.svg">    
+    </div>
+
+    <div class="step slide" data-x="7000" data-y="-1200" data-z="1000">
+        <h1>Welche Technologien kamen in Frage?</h1>
+    </div>
+
+
+    <div class="step slide" data-x="7000" data-y="-1200" data-z="-1000">
+        <!-- Michael -->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">ROCA (Resource Oriented Client Architecture)</div>
+        <img src="slide5/ROCA.svg">
+            </div>
+        </div>
+    </div>
+    <div class="step slide" data-x="6600" data-y="-1200" data-z="-1000" data-rotate-y="180">
+        <!-- Michael -->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">SPA (Single Page Application)</div>
+                <img src="slide5/SPA.svg">
+            </div>
+        </div>
+    </div>
+
+<!--Grafik aus https://confluence.lvm.de/confluence/display/CARCH/Entscheidungsvorlage+Client+Architektur+Summary
+
+
+Benutzerakzeptanz
+ Außendienst und Innendienst brauchen gute Bedienkomfort gutes UX
+ gute Performance
+
+Technische Stabilität
+ HTML, CSS und Javascript sind bei beiden Stabilität
+ Dabei sind HTML, Javascript (Ecmascript-Standard) und CSS seit Jahren stabile und kompatible Technologien. Daraus ergibt sich, dass trotz technologischem Wandel Anwendungen kompatibel bleiben
+ Lediglich die SPA ausliefernde Komponente muss stabil laufen. Vorteil: Keine zusätzliche Serverschicht für HTML-Generierung
+
+Integrierbarkeit mit LAS
+ SPA kann mit dem Java-Swing-Client kommunizieren (JxBrowser)
+ RoCA könnte zwar auch Javascript zur kommunikation nutzen, damit wäre Logik auf dem Client - Es passt nur
+  schlecht zur Architektur
+ Für SPA spricht hier das der Zustand des Client gehalten wird und somit ein tauschen von Panel und/oder SPA relativ einfach möglich ist.
+
+Langlebigkeit
+ Für keine der beiden Architekturen und deren eingesetzten Technologien gibt es signifikante Vorteile, weil die 
+ Basis HTML, CSS und JavaScript ist. Beide Technologien lassen sich mit unterschiedlichen Frameworks (Architekturevolution) parallel betreiben.
+ ## Wir haben Infrastruktur in der Hand und könnten auch Electron verwenden.
+
+
+Modularisierung - Integration
+ TODO
+
+
+Entwicklereffizienz
+ HTML, CSS muss immer bekannt sein
+ javascript bei Roca - typsescript bei Angular
+ Typescript ist das besser javascript
+
+ roca - denken in resourcen muss erlernt werden - keine direkte übersetzung aus dem proceduralen
+ Typescript unterstützt ähnliche Sprachkonstrukte und Toolunterstützung, wie Java (Knowhow vorhanden)
+ Angular hat eine große Community
+ RoCA mit Spring MVC/ typmeleaf ist auch bekannt aber viel weniger
+ SPA - nur eine Laufzeit die ich kontrollieren muss.
+-->
+
+<!-- Michael -->
+   <!-- <div class="step slide" data-x="7500" data-y="-1200" data-z="-1000">
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Benutzerakzeptanz</div>
+                <img src="slide6/benutzerakzeptanz.svg">
+            </div>
+        </div>
+    </div>
+    <div class="step slide" data-x="8000" data-y="-1200" data-z="-1000">
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Technische Stabilität</div>
+                <img src="slide6/technischestabilitaet.jpg">
+            </div>
+        </div>
+    </div>
+    <div class="step slide" data-x="8500" data-y="-1200" data-z="-1000">
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Integrierbarkeit in LAS</div>
+                <img src="slide6/integrationsfaehigkeit.svg">
+            </div>
+        </div>
+    </div>
+
+    <div class="step slide" data-x="9000" data-y="-1200" data-z="-1000">
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Langlebigkeit</div>
+                <img src="slide6/langlebigkeit.svg">
+            </div>
+        </div>
+    </div>
+    <div class="step slide" data-x="9500" data-y="-1200" data-z="-1000">
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Modularisierbarkeit</div>
+                <img src="slide6/modularisierbarkeit.svg">
+            </div>
+        </div>
+    </div>
+    <div class="step slide" data-x="10000" data-y="-1200" data-z="-1000">
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Entwicklereffizienz</div>
+                <img src="slide6/arrowtarget.jpg">
+            </div>
+        </div>
+    </div>
+     -->
+    <div class="step slide" data-x="12500" data-y="-1200" data-z="5000">
+        <h1>Wie integrieren wir<br> im Browser?</h1>
+    </div>
+    <div class="step slide" data-x="11500" data-y="-1200" data-z="-1000">
+
+     <!--   <p>Nur eine Laufzeit, in der alle Anwendungen mit einander interagieren. Module werden evtl. lazy und remote geladen.
+            D.h. ein SPA-Monolith, der dadurch eine sehr einfache Integration bietet</p>
+            <p> eine unterstützte Angular-Version für alle</p>-->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Integration - OneSPA</div>
+                <img src="slide7/OneSPA.svg">
+            </div>
+        </div>
+    </div>
+<!-- Christian -->
+    <div class="step slide" data-x="12500" data-y="-1200" data-z="-1000">
+
+     <!--   <p>Integration der Anwendung über iFrames. Kommunikation der Anwendungen läuft hier über postMessages. Jede Anwendungen
+            kann hier ihre eigenen Bibliotheken und deren Versionen nutzen.</p>-->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Integration - MultiPageApplication (MPA)</div>
+                <img src="slide8/MPA.svg">
+            </div>
+        </div>
+    </div>
+<!-- Michael -->
+        <div class="step slide" data-x="13500" data-y="-1200" data-z="-1000">
+
+<!--  <p>Jede Form der Integration läuft nur über Links. Damit sind eingebettete UIs nicht möglich. Die Anwendungen
+            haben die maximale Unabhängigkeit. Tabs werden hier stark eingesetzt.</p>-->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Integration - Link-Integration</div>
+                <img src="slide9/Link-Integration.svg">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="step slide" data-x="12500" data-y="-1200" data-z="0">
+        <!--
+               1) Start mit geringem Overhead, also einfachstem Integrationsszenario -> OneSPA
+               2) Regelmäßiges Review der Möglichkeiten und der neu zu integrierenden Anwendungen
+               Bewertung je nach Anwendungsfall. z.B. Integration zwischen SPAs oder Integration zwischen Altanwendung und SPA
+               3)Zielszenario: Alles im Web. Kleinere Tools vielleicht als Komponenten, eigenständige, große Anwendungen per IFrame oder Link integrieren
+               4)Nein - es gibt nicht die EINE Integrationslösung
+
+        -->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Können die L&ouml;sungsans&auml;tze nur isoliert voneinander bestehen?</div>
+                <br>
+        <ul>
+        <li>Kleine Anwendungsteile wie z.B. Paypal oder Kundensuche -> OneSPA oder IFrame</li>
+        <li>Anwendungen, deren Schnittstelle sehr schmal sind -> Link-Integration</li><!-- (ggfs. nur ein Link) z.B. Mail-Kalender bzw. Vertrag-Schaden-->
+        <li>Anwendungen mit einer starken Integration zueinander -> OneSPA, MPA</li><!--  - starkes Springen zwischen den Domänen-->
+        </ul>
+        <!--
+               1) Start mit geringem Overhead, also einfachstem Integrationsszenario -> OneSPA
+               2) Regelmäßiges Review der Möglichkeiten und der neu zu integrierenden Anwendungen
+               Bewertung je nach Anwendungsfall. z.B. Integration zwischen SPAs oder Integration zwischen Altanwendung und SPA
+               3)Zielszenario: Alles im Web. Kleinere Tools vielleicht als Komponenten, eigenständige, große Anwendungen per IFrame oder Link integrieren
+               4)Nein - es gibt nicht die EINE Integrationslösung
+
+        -->
+            </div>
+        </div>
+    </div>
+
+
+    <div class="step slide" data-x="15000" data-y="-1200" data-z="5000">
+        <h1>Wie integrieren wir die neue Browser- und alte Swing-Welt?</h1>
+    </div>
+
+
+<!-- christian -->
+     <div class="step slide" data-x="15000" data-y="-1200" data-z="-1000">
+                     <!--Bild für Integration
+            1) Idee: Aktueller Chromium um möglichst nah an modernen Browser-Features zu sein
+            2) JXBrowser
+            3) Bridge in Richtung LAS und Bridge in Richtung Webanwendung
+            4) Bild + Codeschnippsel der Bridges
+            5) Herausforderung: Speicherverbrauch (keine beliebige Anzahl von Browserinstanzen)
+            6) Lösung: IFrames, die ausgetauscht werden innerhalb der Browser-Instanz
+            7) Keine Interaktion zwischen IFrames (technisch möglich, soll aber nicht genutzt werden)
+            8) Dafür soll Integrationslayer genutzt werden, welches an andere SPAs oder auch LAS delegieren kann
+            9) Herausforderung 2: Initialisierung, wann ist die SPA fertig geladen (bzw. Angular Komponente). Das
+             LAS muss darüber Bescheid wissen
+             10) Lösung: Asynchrones Warten bis Bridge meldet, dass SPA geladen
+             CORS + SOP beachten
+        -->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Integrationstechnik - Java Swing</div>
+                    <img src="slide11/Integration1.svg">                    
+            </div>
+        </div>
+    </div>
+         <div class="step slide" data-x="14750" data-y="-1200" data-z="-1000" data-rotate-z="180" data-rotate-x="180">
+             <!-- 
+                JXBrowser übergangslösung  -langfristig im Web
+                Bridge zwischen beiden Welten
+                wichtig bei Bridge nur einfache Objektstrukturen
+                Achtung Speicher - speziallösung für viele offene Anwendungen
+
+
+             -->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Integrationstechnik - Java Swing mit SPA</div>                    
+                    <img src="slide11/Integration2.svg">
+                    <div>https://www.teamdev.com/jxbrowser</div>
+            </div>
+        </div>
+    </div>
+
+     <div class="step slide" data-x="14750" data-y="-1200" data-z="-2000" data-rotate-z="180" data-rotate-x="180">
+             <!--
+                JXBrowser übergangslösung  -langfristig im Web
+                Bridge zwischen beiden Welten
+                wichtig bei Bridge nur einfache Objektstrukturen
+                Achtung Speicher - speziallösung für viele offene Anwendungen
+
+
+             -->
+        <div class="vcenter">
+            <div class="slide-content">
+
+                    <video controls >
+                    <source src="slide11/web-integration.ogv" type="video/ogg">
+                    </video>
+            </div>
+        </div>
+    </div>
+
+
+<div class="step slide" data-x="13500" data-y="-1200" data-z="-2000" data-rotate-z="180" data-rotate-x="180">
+             <!-- 
+                Java WElt
+    <div class="step slide" data-x="14750" data-y="-1200" data-z="-2000" data-rotate-z="180" data-rotate-x="180">
+        <!--
+           Java WElt
+
+
+             -->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Java-Seite</div>                    
+                <pre class="hex">
+                    <!-- TODO Java-Bridge-->
+BrowserView browserComponent = new BrowserView(...);
+browserComponent.loadURL("http://kraftfahrt.lvm.de/"); //start der Anwendung
+...
+// setzen der Bridge  SPA->Java
+JSValue window = browserComponent.executeJavaScriptAndReturnValue("window");
+window.asObject().setProperty("lasComBridge", lasComBridge); 
+...
+// Aufruf der Bridge Java->SPA
+browserComponent
+  .executeJavaScriptAndReturnValue("window.spaComBridge.event('KundenSuche','4711','12345','{"KundenNr":"1234"}')");
+                </pre>
+            </div>
+        </div>
+    </div>
+
+<div class="step slide" data-x="12250" data-y="-1200" data-z="-2000" data-rotate-z="180" data-rotate-x="180">
+             <!-- 
+                Java WElt
+    <div class="step slide" data-x="14750" data-y="-1200" data-z="-2000" data-rotate-z="180" data-rotate-x="180">
+        <!--
+           Java WElt
+
+
+             -->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Java- Bridge</div>                    
+                <pre class="hex">
+
+public class LasComBridge {
+ public void addTreeNode(...) {
+	...
+ }
+
+ public void addTreeNodeAtTreeId(...) {
+ 	...
+ }
+	
+ public void closeProcess(String viewId) {
+	...
+ }
+
+	
+ public void closeTreeNode(String viewId, String viewUrl) {
+	...
+ }
+
+ public void event(String eventName, String correlationId, String viewId, String parameter) {
+	...
+ }
+ ....
+}
+
+ </pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="step slide" data-x="11000" data-y="-1200" data-z="-2000" data-rotate-z="180" data-rotate-x="180">
+             <!-- 
+                JS WElt
+
+
+             -->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">JS-Bridge (Typescript)</div>                    
+                <pre class="hex">
+export class SPAComBridge {
+ event(eventName: string, viewId: string,correlationId?: string, parameter?: any){
+   ...
+ }
+
+ startProcess(url: string, viewId: string) {
+   ...
+ }
+
+ public closeProcess(viewId: string, url?: string) {
+   ...
+ }
+
+ public refresh(){
+   ...
+ }
+ ...
+}
+                </pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="step slide" data-x="16500" data-y="-1200" data-z="-1000" >
+               <!--
+            1) Backends Java mit Spring Boot, , Docker, Jenkins
+            2) Swagger für API-Dokumentation
+            3) RXJS, Angular@Latest statt LTS, Bootstrap 4 (?), SASS
+            4) Tooling: Angular-cli, Webstorm, npm, Maven, Visual Code, Eclipse/IntelliJ, Chrome,
+
+
+        -->
+        <div class="vcenter">
+            <div class="slide-content">
+                <div class="slide-header">Technologie-Stack</div>
+                    <img src="slide12/Zeichnung_norm.svg">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Michael -->
+    <div class="step slide" data-x="19500" data-y="-1200" data-z="7000">
+        <h1>Was sind unsere Herausforderungen?</h1>
+        <!--
+    Herausforderungen:
+       Neuer Technologie-Stack
+       Starke Bewegung im Stack (npm - yarn / rollup - webpack / angular-cli - gulp)
+       Entscheidung SPA/RoCA schwierig - teils subjektiv
+         Abhängig ob vorher Java-Entwickler oder JS-Entwickler
+       FullStack Entwickler oder Trenung von Server und Client?
+       Wieviel zentrale Libs, wieviel Unabhängigkeit?
+       reactive bis wohin
+       Kluft zwischen alter Welt und neuer Welt
+       Selbst Mainframe-Anwendungen können migiert werden - POC
+       Nicht zu viel im Vorraus
+       Wir glauben es wird noch ein remote module-System in Angular geben
+       Lieber mehr Muster und redundanz als ein Monolith
+       Lieber ein Monolith als je Klasse ein Modul
+ -->
+    </div>
+
+    <div class="step slide" data-x="19500" data-y="-1200" data-z="5000">
+        <div class="slide-header">Neuer Technologie-Stack</div>
+        <img src="img/legotower.jpg">
+        <!--
+    Herausforderungen:
+       Neuer Technologie-Stack
+       Positiv für Entwickler -> schnellerer Entwicklung, besseres Tooling, kürzere Turnaround-Zeiten, aktuelle Technologie
+       Spannend
+
+       Aber: Starke Bewegung im Stack (npm - yarn / rollup - webpack / angular-cli - gulp)
+       Swing sehr stabil <-> Spannungsfeld <-> möglicherweise heterogene SPA-Landschaft, die integriert werden muss -> Anspruchsvoll!
+ -->
+
+    </div>
+
+    <div class="step slide" data-x="19500" data-y="-1200" data-z="3000">
+        <div class="slide-header">Umdenken in der Entwicklung</div>
+        <img src="img/umdenken.svg">
+
+        <!--
+    Herausforderungen:
+       Teams sind es gewohnt sich sehr stark auf die Fachlichkeit zu konzentrieren
+       Das wird so nicht mehr funktionieren
+       Support und neues Mindset in die Projekte mitbringen, die mit der neuen Technologie starten
+       Innovationsfähigkeit hoch halten
+       Management überzeugen -> Technologie darf nichts kosten?!
+       Fullstack-Entwickler nach Abschluss Implementierung
+       Unterstützung durch Architekten, die mit die Projekte starten und mit entwickeln
+
+       Drei Technologien-Welten (Mainframe, Java-Swing/Stateful, Tower/stateless)
+       -  Kommunikation teilweise schwierig
+
+ -->
+
+    </div>
+
+    <div class="step slide" data-x="19500" data-y="-1200" data-z="1000">
+        <div class="slide-header">Wie können wir unsere Entscheidung absichern?</div>
+        <img src="img/lvmshield.svg">
+
+        <!--
+       Bewusstes Offen-Halten der Integrationsszenarien
+       Architekten müssen immer wieder validieren ob der gewählte Ansatz passt
+       Integrationsszenarien erneut validieren durch: Code- und Architektur-Reviews
+       Sicher: Java Swing wird in der Zukunft eingestellt, nur wann ist unklar
+ -->
+
+    </div>
+
+    <div class="step slide" data-x="19500" data-y="-1200" data-z="-1000">
+        <div class="slide-header">Zentrale Vorgaben vs. Entwicklerfreiheit</div>
+        <img src="img/einheitlichkeit-freiheit.jpg">        
+
+        <!--
+       Wie zieht man die Grenze?
+       Entwicklungsgeschindigkeit vs. Einheitlichkeit?
+       Wie machen wir das: klare UX-Vorgaben per Styleguide und Quality-Gate
+       technisch: Infrastrukturelle Dinge (Logging, HTTP-Zugriffe, Security..)
+       Arbeit mit Mustern anstelle von Frameworks -> Cookbooks
+ -->
+
+    </div>
+<!-- Christian -->
+    <div class="step slide" data-x="22500" data-y="-1200" data-z="5000" >
+        <h3>Welche Erfahrungen haben wir gemacht?</h3>
+    </div>
+
+    <div class="step slide" data-x="22500" data-y="-1200" data-z="3000" >
+        <!-- TODO Bild 
+          Einstiegshürde gering (Anwendungssetup)
+          schneller im Vergleich 
+          kuerzerer Turnaround - stateless - ich muss einen Zustand nicht wieder herstellen
+          Debug-Tools gerade vom chrome - Änderungen an css und html sieht man im chrome direkt
+          einfaches Deployment - pipeline
+          Entwickler unterschiedlich zu begeistern
+          -->
+        <div class="slide-header">Hohe Entwicklungsgeschwindigkeit und Entwicklerzufriedenheit</div>
+        
+            <!-- todo Bild lachender Entwickler -->
+            <img src="img/hackaton.JPG">
+
+        
+    </div>
+
+     <div class="step slide" data-x="22500" data-y="-1200" data-z="1000" >
+        <div class="slide-header">Uns fehlt nichts</div>
+        <!-- 
+            TODO Bild: Wohnzimmer alt (eicherustikal) vs neu - Modern
+            Aengst vorher:
+            - Komfort fehlt in der Entwicklung und Bedienung
+            - Performance gerade von SPA
+            - Bindung an ein Framework - Technologieunabhängigkeit
+            - Verlust von Einheitlichkeit
+            
+            Mit angular 4 ist Performance der Hammer!!!
+            Beispiel von AO - Buchung zeigen
+            Integration für Benutzer nicht merkbar
+         -->
+         <div id="thumbs_up" class="vcenter">
+                      
+         </div>
+         
+
+    </div>
+
+    <div  class="step try" data-x="1500" data-y="1500" data-z="2000">
+        <div class="presentation_title">
+            <span>Die Desktopanwendung ist tot - lang lebe die Single-Page-Application</span>
+        </div>
+        <div class="presentation_title_fragen">
+            <span>Fragen:</span>
+        </div>
+        <div class="title_author">
+            <p>Michael F&uuml;ser | @floenk</p>
+            <p>Christian Gr&uuml;nberg | @gruenyC</p>
+            <p>https://github.com/LVM-IT/ | @LVM_IT</p>
+            <p>http://www.lvm.de</p>
+        </div>
+    </div>
+
+
+    <div id="flythrough-lvm" class="step slide" data-x="-750" data-y="300" data-z="0">
+        <img src="background/hintergrund.svg">
+    </div>
+</div>
+
+<!--
+
+    Hint is not related to impress.js in any way.
+
+    But it can show you how to use impress.js features in creative way.
+
+    When the presentation step is shown (selected) its element gets the class of "active" and the body element
+    gets the class based on active step id `impress-on-ID` (where ID is the step's id)... It may not be
+    so clear because of all these "ids" in previous sentence, so for example when the first step (the one with
+    the id of `bored`) is active, body element gets a class of `impress-on-bored`.
+
+    This class is used by this hint below. Check CSS file to see how it's shown with delayed CSS animation when
+    the first step of presentation is visible for a couple of seconds.
+
+    ...
+
+    And when it comes to this piece of JavaScript below ... kids, don't do this at home ;)
+    It's just a quick and dirty workaround to get different hint text for touch devices.
+    In a real world it should be at least placed in separate JS file ... and the touch content should be
+    probably just hidden somewhere in HTML - not hard-coded in the script.
+
+    Just sayin' ;)
+
+-->
+
+<script>
+    if ("ontouchstart" in document.documentElement) {
+        document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+    }
+</script>
+
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+
+
+</body>
+</html>
+

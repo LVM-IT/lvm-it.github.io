@@ -1,0 +1,26 @@
+Welche Fragen stellen wir?
+Wer setzt schon Browser als geschäftskritische / zentrale Anwendungsumgebung ein?
+Wer setzt Swing bzw. JavaFX ein? 
+Wer kennt die ROCA-Architektur?
+
+
+
+Welche Fragen können wir vom Publikum erwarten?
+Warum nicht react?
+Warum ausgerechnet Angular?
+Wie lange braucht ihr bis alles im Browser ist?
+Warum fangt ihr mit einer monolithischen Architektur im Client an?
+Wie bekommt ihr die SPA per Link-Integration und passender Performance hin?
+Wie macht ihr Dashboards?
+
+
+
+Intro - Christian Selbstvorstellung - Michael Selbstvorstellung und Intro
+Geschichte 5min - Christian 
+ROCA SPA 10 min  - Michael
+Integration 20 -  Michael OneSPA - Christian Multi - Michael rest
+Java 26 - Christian 
+Tech 27 - Christian
+Herausforderung 2 je -> 35 - Christian bis Umdenken - Michael
+Erfahrungen 42 - Christian Entwicker Effizienz - Michael Uns fehlt nichts
+Noch Fragen?
